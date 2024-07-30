@@ -38,17 +38,50 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    function isOdd(inventor) {
+      return inventor.year >= 1500 && inventor.year <1600;
+    }
+    const inventorsBornIn1500 = inventors.filter(isOdd);
+    //console.table(inventorsBornIn1500);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    function firstLast(inventor) {
+      return inventor.first +" "+ inventor.last;
+    }
+    const mappedArr = inventors.map(firstLast);
+    //console.table(mappedArr); // Outputs [2, 3, 4, 5, 6]
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sorted = inventors.sort((a, b) => a.year - b.year);
+    //console.table(sorted);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-
+    const yearsLived = inventors.reduce((total, inventor) => total + (inventor.passed - inventor.year) , 0);
+    //console.log(yearsLived);
     // 5. Sort the inventors by years lived
+
+    //In this way the object inventors get edited 
+    //function yearLived(inventor) {
+    //  return inventor.lived = inventor.passed - inventor.year;
+    //}
+    //const yearsLivedAdded = inventors.map(yearLived);
+    //const sortedLived = inventors.sort((a, b) => a.lived - b.lived);
+    //console.table(sortedLived);
+
+    //This is how it's done by tutor
+    const oldest = inventors.sort(function(a,b){
+      const lastGuy = a.passed - a.year;
+      const nextGuy = b.passed - b.year;
+      if(lastGuy > nextGuy){
+        return -1;
+      }else{
+        return 1;
+      }
+    })
+    console.table(oldest);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
